@@ -1,0 +1,93 @@
+2012-04-09T06:22:00.000Z	gear4		Hi, why apache2 always downloads stuff ?
+2012-04-09T06:23:00.000Z	gear4		PHP files, at least
+2012-04-09T06:23:00.000Z	gear4		I installed and enabled php5
+2012-04-09T06:23:00.000Z	gear4		but, I go to the folder, it downloads something called "download" (happened 5 times?)
+2012-04-09T06:23:00.000Z	sacarlson	gear4	did you try installing phpmyadmin ?
+2012-04-09T06:24:00.000Z	gear4	sacarlson	no
+2012-04-09T06:25:00.000Z	sacarlson	gear4	it always seems to fix that problem for me.  so it's worth a try
+2012-04-09T06:25:00.000Z	gear4	sacarlson	kk
+2012-04-09T06:26:00.000Z	gear4	sacarlson	no, never changed anything
+2012-04-09T06:27:00.000Z	sacarlson	gear4	what method did you use to install apache?
+2012-04-09T06:27:00.000Z	gear4	sacarlson	apt-get
+2012-04-09T06:28:00.000Z	gear4	sacarlson	phpmyadmin works, nothing else with PHP
+2012-04-09T06:28:00.000Z	sacarlson	gear4	oh so you can now bring up phpmyadmin site?
+2012-04-09T06:28:00.000Z	gear4	sacarlson	yes
+2012-04-09T06:29:00.000Z	gear4	sacarlson	but, not my work ..
+2012-04-09T06:29:00.000Z	sacarlson	gear4	 and what url did you use to try to access phpmyadmin?
+2012-04-09T06:30:00.000Z	gear4	sacarlson	http://localhost/phpmyadmin/
+2012-04-09T06:30:00.000Z	sacarlson	gear4	that won't bring up the login page?  what version of ubuntu are you running?
+2012-04-09T06:31:00.000Z	gear4	sacarlson	I said, phpmyadmin works. Not my other stuff
+2012-04-09T06:31:00.000Z	sacarlson	gear4	oh then it must be your files then.  php is working fine
+2012-04-09T06:32:00.000Z	gear4	sacarlson	it's index.php
+2012-04-09T06:32:00.000Z	sacarlson	gear4	did you try a php file with the test line?
+2012-04-09T06:32:00.000Z	gear4	sacarlson	yes
+2012-04-09T06:33:00.000Z	gear4	sacarlson	even empty doesn't work
+2012-04-09T06:33:00.000Z	sacarlson	gear4	and that also fails?  maybe it's a permision problem
+2012-04-09T06:33:00.000Z	gear4	sacarlson	can't be
+2012-04-09T06:33:00.000Z	sacarlson	gear4	why can't it?
+2012-04-09T06:33:00.000Z	gear4	sacarlson	it's in /var/www , made by root
+2012-04-09T06:33:00.000Z	sacarlson	gear4	what's the test line in your php test file?
+2012-04-09T06:34:00.000Z	gear4	sacarlson	there's nothing in it
+2012-04-09T06:34:00.000Z	sacarlson	gear4	well add the test line you want me to look it up for you?
+2012-04-09T06:36:00.000Z	sacarlson	gear4	how could phpmyadmin work and stop working?  what did you change?
+2012-04-09T06:36:00.000Z	gear4	sacarlson	I change nothing
+2012-04-09T06:36:00.000Z	sacarlson	gear4	yes phpinfo but what do you add around it?
+2012-04-09T06:36:00.000Z	gear4	sacarlson	apparently PHP wasn't installed ?
+2012-04-09T06:36:00.000Z	gear4	sacarlson	the tags
+2012-04-09T06:37:00.000Z	sacarlson	gear4	when phpmyadmin is installed it has dependancy on php so it had to be installed
+2012-04-09T06:39:00.000Z	sacarlson	gear4	very confusing you say it works then it's not.  you don't tell us what you changed for these things to happen
+2012-04-09T06:40:00.000Z	gear4	sacarlson	it logged in now ..
+2012-04-09T06:41:00.000Z	gear4	sacarlson	phpmyadmin login works, but nothing else in PHP
+2012-04-09T06:41:00.000Z	sacarlson	gear4	phpmyadmin is writen in php so it works fine
+2012-04-09T06:41:00.000Z	gear4	sacarlson	I guessed
+2012-04-09T06:42:00.000Z	sacarlson	gear4	so focus on your custom php files and there permisions
+2012-04-09T06:42:00.000Z	sacarlson	gear4	ya they'er
+2012-04-09T06:44:00.000Z	gear4	sacarlson	I changed permissions to 755 AND 777, changed user to root, my normal user, and another user. Still no change
+2012-04-09T06:45:00.000Z	sacarlson	gear4	ok show me the single line of the test.php  file that I assume you ran after phpmyadmin install
+2012-04-09T06:45:00.000Z	gear4	sacarlson	<?php phpinfo(); ?>
+2012-04-09T06:46:00.000Z	sacarlson	gear4	ok and it's file location ?
+2012-04-09T06:46:00.000Z	gear4	sacarlson	/home/dev/web/graphox/home/phpinfo.php
+2012-04-09T06:47:00.000Z	sacarlson	gear4	that looks like a problem if you didn't modify apparmor
+2012-04-09T06:47:00.000Z	gear4	sacarlson	apparmor ?
+2012-04-09T06:48:00.000Z	sacarlson	gear4	yes I think appache is an application that Is or was a part of aparmor so try your test file in the real directory at /var/www
+2012-04-09T06:48:00.000Z	gear4	sacarlson	you're right
+2012-04-09T06:49:00.000Z	gear4	sacarlson	works perfect
+2012-04-09T06:49:00.000Z	gear4	sacarlson	problem is, I want quick read and write acces
+2012-04-09T06:49:00.000Z	sacarlson	gear4	so modify apparmor settings or move your files
+2012-04-09T06:49:00.000Z	gear4	sacarlson	kk
+2012-04-09T06:49:00.000Z	gear4	sacarlson	how ? :3
+2012-04-09T06:50:00.000Z	sacarlson	gear4	guess you'll have to google apparmor
+2012-04-09T06:51:00.000Z	gear4	sacarlson	thing is, it worked perfect in ubuntu 11.04
+2012-04-09T06:53:00.000Z	gear4	sacarlson	could I remove/disable apparmor ?
+2012-04-09T06:54:00.000Z	sacarlson	gear4	 yes you can disable it
+2012-04-09T06:54:00.000Z	sacarlson	gear4	but if you ever get hacked like I did you would be glad you had it
+2012-04-09T06:55:00.000Z	gear4	sacarlson	nevermind
+2012-04-09T06:55:00.000Z	gear4	sacarlson	apparmor for apache2 isn't installed
+2012-04-09T06:56:00.000Z	sacarlson	gear4	so that's not the solution then?
+2012-04-09T06:57:00.000Z	gear4	sacarlson	not as far as I can see
+2012-04-09T06:57:00.000Z	sacarlson	gear4	did you try your test file at the location /var/www ?
+2012-04-09T06:57:00.000Z	gear4	sacarlson	yes. it works
+2012-04-09T06:58:00.000Z	sacarlson	gear4	oh it's php that has apparmor then
+2012-04-09T06:58:00.000Z	gear4	sacarlson	any way I can remove it ?
+2012-04-09T06:58:00.000Z	sacarlson	gear4	well you can disable it,  it's built into the kernel
+2012-04-09T06:59:00.000Z	gear4	sacarlson	I mean, the php armor
+2012-04-09T06:59:00.000Z	sacarlson	gear4	just disable all of it to prove it's the problem
+2012-04-09T06:59:00.000Z	sacarlson	gear4	fix it later
+2012-04-09T06:59:00.000Z	gear4	sacarlson	I think I know how
+2012-04-09T07:01:00.000Z	sacarlson	gear4	ya it's simple sudo /etc/init.d/apparmor stop
+2012-04-09T07:01:00.000Z	gear4	sacarlson	no
+2012-04-09T07:04:00.000Z	sacarlson	gear4	remind you the apparmor is only a theory until proven
+2012-04-09T07:04:00.000Z	gear4	sacarlson	yes
+2012-04-09T07:05:00.000Z	gear4	sacarlson	not apparmor
+2012-04-09T07:06:00.000Z	sacarlson	gear4	and what has proven that?
+2012-04-09T07:06:00.000Z	gear4	sacarlson	I stopped apparmor, moved apache's web root, and still doesn't work
+2012-04-09T07:07:00.000Z	sacarlson	gear4	and restarted appache2 ?
+2012-04-09T07:07:00.000Z	gear4	sacarlson	yes
+2012-04-09T07:07:00.000Z	sacarlson	gear4	I guess stoping apparmor is more difficult then I thought
+2012-04-09T07:08:00.000Z	gear4	sacarlson	maybe, invoke-rc.d apparmor stop
+2012-04-09T07:08:00.000Z	sacarlson	gear4	or it's not apparmor some other setting in php configs
+2012-04-09T07:08:00.000Z	gear4	sacarlson	maybe
+2012-04-09T07:09:00.000Z	sacarlson	gear4	I would have to reboot to bring up ubuntu 11.10 to duplicate
+2012-04-09T07:10:00.000Z	gear4	sacarlson	:/
+2012-04-09T07:11:00.000Z	sacarlson	gear4	I'm sure I could isolate in 1 hours not two days so I'll take a wak at it
+2012-04-09T07:11:00.000Z	gear4	sacarlson	kk
